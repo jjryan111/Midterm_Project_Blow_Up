@@ -14,7 +14,7 @@ namespace Midterm_Blow_Me_up
         private int size;
         private int bomb;
         private Random ran = new Random();
-
+        private int flagsOnBombs = 0;
         // constructor uses SetSize and SetBomb to set the values of each int to user input
         public PlayGame()
         {
@@ -193,32 +193,33 @@ namespace Midterm_Blow_Me_up
             // flagCheck is set to choice[2] after it has been cast to a char
             char flagCheck = (char)choices[2];
             //flagsOnBombs counter is set to 0
-            int flagsOnBombs = 0;
+//            int flagsOnBombs = 0;
             bool end = false;
             List<int> uChoices = new List<int>();
 
             uChoices.Add(x);
             uChoices.Add(y);
+            Console.WriteLine(flagsOnBombs);
 
 
             // if flagCheck is #, the value at index x,y(the point the user chose) is set to #
             if (flagCheck == '#')
             {
-                playBoard[y, x] = "#";
+                playBoard[y,x] = "#";
             }
             // if the flagCheck is F and the flagCount is less than the total number of bombs, the users coords are set to ?
             else if (flagCheck == 'F')
             {
-                playBoard[y, x] = "?";
+                playBoard[y,x] = "?";
                 //if the value stored at the backBoard index is greater than or equal to 100, flagsOnBombs is incremented
-                if (backBoard[y, x] >= 100)
+                if (backBoard[y,x] >= 100)
                 {
                     flagsOnBombs++;
                 }
                 // if the user matches flags to all the bombs, the user wins!
                 if (flagsOnBombs == bombs)
                 {
-                    playBoard[y, x] = "!";
+                    playBoard[y,x] = "!";
                     playBoard[0, 0] = "1";
                     Console.WriteLine("YOU WIN");
                     end = true;
@@ -325,6 +326,41 @@ namespace Midterm_Blow_Me_up
 
             return dead;
         }
+        public void PrintFinalBoard(int[,] backboard)
+        {
 
+            for (int k= 0; k < (backboard.GetLength(1)-1); k++)
+            {
+                Console.Write(k+"\t");
+            }
+            Console.WriteLine();
+            for (int j = 1; j < (backboard.GetLength(0) - 1); j++)
+            {
+                int letters = 65 + (j - 1);
+                Console.Write(((char)letters).ToString() + "\t");
+                for (int i = 1; i < (backboard.GetLength(1) - 1); i++)
+                {
+                    
+                    if (backboard[j, i] > 10 && backboard[j, i] < 100)
+                    {
+                        Console.Write((backboard[j, i] - 10) + "\t");
+                    }
+                    else if (backboard[j, i] == 0 || backboard[j, i] == 10)
+                    {
+                        Console.Write(" \t");
+                    }
+                    else if (backboard[j, i] < 10)
+                    {
+                        Console.Write((backboard[j, i]) + "\t");
+                    }
+                    else
+                    {
+                        Console.Write("*\t");
+                    }
+                }
+                Console.WriteLine();
+            }
+            
+        }
     }
 }

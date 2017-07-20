@@ -37,8 +37,7 @@ namespace Midterm_Blow_Me_up
                 Console.WriteLine();
             }
             Console.WriteLine("\n");
-            //            board.PrintBoard(originalboard);
+            newGame.PrintFinalBoard(backBoard);
         }
-
     }
 }
