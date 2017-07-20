@@ -14,7 +14,7 @@ namespace Midterm_Blow_Me_up
         private int size;
         private int bomb;
         private Random ran = new Random();
-        private int flagsOnBombs = 0;
+        public int flagsOnBombs = 0;
         // constructor uses SetSize and SetBomb to set the values of each int to user input
         public PlayGame()
         {
@@ -196,10 +196,10 @@ namespace Midterm_Blow_Me_up
 //            int flagsOnBombs = 0;
             bool end = false;
             List<int> uChoices = new List<int>();
-
+            //Console.WriteLine(bomb);
             uChoices.Add(x);
             uChoices.Add(y);
-            Console.WriteLine(flagsOnBombs);
+//            Console.WriteLine(flagsOnBombs);
 
 
             // if flagCheck is #, the value at index x,y(the point the user chose) is set to #
@@ -210,10 +210,12 @@ namespace Midterm_Blow_Me_up
             // if the flagCheck is F and the flagCount is less than the total number of bombs, the users coords are set to ?
             else if (flagCheck == 'F')
             {
+               // Console.WriteLine(flagCheck);
                 playBoard[y,x] = "?";
                 //if the value stored at the backBoard index is greater than or equal to 100, flagsOnBombs is incremented
                 if (backBoard[y,x] >= 100)
                 {
+//                    Console.WriteLine("got here");
                     flagsOnBombs++;
                 }
                 // if the user matches flags to all the bombs, the user wins!
@@ -273,6 +275,7 @@ namespace Midterm_Blow_Me_up
 
         public string[,] WriteHeaders(string[,] playBoard, bool end)
         {
+            
             // nested for loop iterates through the playBoard and sets values for each index accordingly.
             for (int i = 0; i < playBoard.GetLength(0); i++)
             {
@@ -331,13 +334,22 @@ namespace Midterm_Blow_Me_up
 
             for (int k= 0; k < (backboard.GetLength(1)-1); k++)
             {
+                
                 Console.Write(k+"\t");
+
             }
+            Console.WriteLine();
+            for (int m = 0; m < backboard.GetLength(1); m++)
+            {
+
+                Console.Write("______");
+            }
+
             Console.WriteLine();
             for (int j = 1; j < (backboard.GetLength(0) - 1); j++)
             {
                 int letters = 65 + (j - 1);
-                Console.Write(((char)letters).ToString() + "\t");
+                Console.Write(((char)letters).ToString() + "  |\t");
                 for (int i = 1; i < (backboard.GetLength(1) - 1); i++)
                 {
                     
@@ -360,7 +372,12 @@ namespace Midterm_Blow_Me_up
                 }
                 Console.WriteLine();
             }
-            
+            for (int n = 0; n < backboard.GetLength(1); n++)
+            {
+
+                Console.Write("______");
+            }
+            Console.WriteLine();
         }
     }
 }

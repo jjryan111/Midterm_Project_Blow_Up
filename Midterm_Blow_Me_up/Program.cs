@@ -27,7 +27,9 @@ namespace Midterm_Blow_Me_up
             {
                 int[] choices = newGame.GetChoice();
                 playerBoard = newGame.UpdateBoard(backBoard, playerBoard, choices, bomb);
-                newGame.PrintBoard(playerBoard);
+               
+                    newGame.PrintBoard(playerBoard);
+              
                 Console.WriteLine();
                 if (playerBoard[0, 0] == "1")
                 {
